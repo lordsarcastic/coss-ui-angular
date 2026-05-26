@@ -1,0 +1,233 @@
+<main class="min-h-screen">
+  <section class="border-b border-border bg-background">
+    <div class="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
+      <div class="flex flex-col justify-center">
+        <div class="mb-5 flex flex-wrap items-center gap-2">
+          <coss-badge>Angular 20</coss-badge>
+          <coss-badge variant="outline">Standalone</coss-badge>
+          <coss-badge variant="secondary">Tailwind</coss-badge>
+        </div>
+        <h1 class="max-w-3xl text-4xl font-semibold tracking-normal text-foreground md:text-6xl">
+          COSS UI Angular
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+          A copy-and-own Angular port of the COSS UI component catalogue. The package exports
+          accessible standalone components and directives that are easy to import, style, test, and
+          publish.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a cossButton href="#components">Browse components</a>
+          <a cossButton variant="outline" href="#installation">Install</a>
+        </div>
+      </div>
+
+      <coss-card>
+        <coss-card-header>
+          <coss-card-title>Component Preview</coss-card-title>
+          <coss-card-description>Built with the library components themselves.</coss-card-description>
+        </coss-card-header>
+        <coss-card-content>
+          <div class="grid gap-4">
+            <coss-alert variant="success">The design system is ready to ship.</coss-alert>
+            <coss-field>
+              <label cossLabel for="preview-email">Email</label>
+              <coss-input-group>
+                <coss-input-addon>@</coss-input-addon>
+                <input cossInput unstyled id="preview-email" placeholder="you@example.com" />
+              </coss-input-group>
+            </coss-field>
+            <div class="flex flex-wrap items-center gap-3">
+              <button cossButton type="button">Primary</button>
+              <button cossButton variant="outline" type="button">Outline</button>
+              <coss-switch aria-label="Enable preview" />
+            </div>
+            <coss-tabs [tabs]="tabItems" value="preview">
+              <p class="text-muted-foreground">
+                Tabs, cards, alerts, inputs, switches, badges, and buttons here are all rendered
+                from the package.
+              </p>
+            </coss-tabs>
+          </div>
+        </coss-card-content>
+      </coss-card>
+    </div>
+  </section>
+
+  <section id="installation" class="border-b border-border">
+    <div class="mx-auto grid max-w-7xl gap-6 px-6 py-12 lg:grid-cols-3">
+      <coss-card>
+        <coss-card-header>
+          <coss-card-title>Install</coss-card-title>
+          <coss-card-description>Add the package to an Angular app.</coss-card-description>
+        </coss-card-header>
+        <coss-card-content>
+          <pre class="overflow-auto rounded-md bg-muted p-4 text-sm"><code>{{ installSnippet }}</code></pre>
+        </coss-card-content>
+      </coss-card>
+
+      <coss-card>
+        <coss-card-header>
+          <coss-card-title>Import</coss-card-title>
+          <coss-card-description>Use individual standalone exports.</coss-card-description>
+        </coss-card-header>
+        <coss-card-content>
+          <pre class="overflow-auto rounded-md bg-muted p-4 text-sm"><code>{{ importSnippet }}</code></pre>
+        </coss-card-content>
+      </coss-card>
+
+      <coss-card>
+        <coss-card-header>
+          <coss-card-title>Tailwind</coss-card-title>
+          <coss-card-description>Scan the package class strings.</coss-card-description>
+        </coss-card-header>
+        <coss-card-content>
+          <pre class="overflow-auto rounded-md bg-muted p-4 text-sm"><code>{{ themeSnippet }}</code></pre>
+        </coss-card-content>
+      </coss-card>
+    </div>
+  </section>
+
+  <section class="border-b border-border">
+    <div class="mx-auto grid max-w-7xl gap-6 px-6 py-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <h2 class="text-2xl font-semibold">Working Examples</h2>
+        <p class="mt-3 text-muted-foreground">
+          These examples exercise data entry, selection, overlays, loading states, and feedback
+          components in the same surface users will copy from.
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <coss-card>
+          <coss-card-header>
+            <coss-card-title>Form Controls</coss-card-title>
+            <coss-card-description>Native semantics with Angular bindings.</coss-card-description>
+          </coss-card-header>
+          <coss-card-content>
+            <div class="grid gap-4">
+              <coss-field>
+                <label cossLabel for="demo-name">Name</label>
+                <input cossInput id="demo-name" placeholder="Ada Lovelace" />
+                <coss-field-description>Use the input directive with native fields.</coss-field-description>
+              </coss-field>
+              <coss-select label="Status" [options]="selectOptions" value="draft" />
+              <coss-radio-group [options]="radioOptions" value="compact" />
+              <coss-slider label="Density" [value]="40" />
+            </div>
+          </coss-card-content>
+        </coss-card>
+
+        <coss-card>
+          <coss-card-header>
+            <coss-card-title>Feedback</coss-card-title>
+            <coss-card-description>Status and loading primitives.</coss-card-description>
+          </coss-card-header>
+          <coss-card-content>
+            <div class="grid gap-4">
+              <coss-progress [value]="72" />
+              <coss-meter [value]="42">Usage: 42%</coss-meter>
+              <div class="flex items-center gap-3">
+                <coss-spinner />
+                <coss-skeleton className="h-5 w-36" />
+              </div>
+              <coss-toast>Published package documentation.</coss-toast>
+            </div>
+          </coss-card-content>
+        </coss-card>
+
+        <coss-card class="md:col-span-2">
+          <coss-card-header>
+            <coss-card-title>Command and Disclosure</coss-card-title>
+            <coss-card-description>Searchable actions and expandable details.</coss-card-description>
+          </coss-card-header>
+          <coss-card-content>
+            <div class="grid gap-4 lg:grid-cols-2">
+              <coss-command [items]="commandItems" />
+              <coss-accordion>
+                <coss-accordion-item>
+                  <span accordion-trigger>Why standalone components?</span>
+                  Standalone imports make the package tree-shakeable and easy to adopt one piece at
+                  a time.
+                </coss-accordion-item>
+                <coss-accordion-item>
+                  <span accordion-trigger>How is accessibility handled?</span>
+                  Native controls are preferred first; custom composites expose ARIA roles and
+                  state.
+                </coss-accordion-item>
+              </coss-accordion>
+            </div>
+          </coss-card-content>
+        </coss-card>
+      </div>
+    </div>
+  </section>
+
+  <section id="components" class="mx-auto max-w-7xl px-6 py-12">
+    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <h2 class="text-3xl font-semibold">Component Reference</h2>
+        <p class="mt-3 max-w-2xl text-muted-foreground">
+          Every exported component includes selector guidance, API notes, usage examples, and
+          accessibility expectations.
+        </p>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:w-[34rem]">
+        <input
+          cossInput
+          type="search"
+          placeholder="Search components"
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+        />
+        <select cossInput [ngModel]="category()" (ngModelChange)="category.set($event)">
+          @for (item of categories; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="grid gap-5">
+      @for (doc of filteredDocs(); track doc.name) {
+        <coss-card>
+          <coss-card-header>
+            <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div>
+                <div class="mb-2 flex flex-wrap items-center gap-2">
+                  <coss-badge variant="secondary">{{ doc.category }}</coss-badge>
+                  <code class="rounded bg-muted px-2 py-1 text-xs text-muted-foreground">
+                    {{ doc.selector }}
+                  </code>
+                </div>
+                <coss-card-title>{{ doc.name }}</coss-card-title>
+                <coss-card-description>{{ doc.summary }}</coss-card-description>
+              </div>
+              <a cossButton variant="ghost" size="sm" [href]="'#' + doc.name">Permalink</a>
+            </div>
+          </coss-card-header>
+          <coss-card-content>
+            <div class="grid gap-5 lg:grid-cols-[1fr_1fr]">
+              <div>
+                <h3 class="mb-2 text-sm font-medium">Usage</h3>
+                <pre class="overflow-auto rounded-md bg-muted p-4 text-sm"><code>{{ doc.usage }}</code></pre>
+              </div>
+              <div class="grid gap-4">
+                <div>
+                  <h3 class="mb-2 text-sm font-medium">API</h3>
+                  <ul class="space-y-2 text-sm text-muted-foreground">
+                    @for (item of doc.api; track item) {
+                      <li class="flex gap-2">
+                        <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                        <span>{{ item }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+                <coss-alert variant="info">{{ doc.accessibility }}</coss-alert>
+              </div>
+            </div>
+          </coss-card-content>
+        </coss-card>
+      }
+    </div>
+  </section>
+</main>

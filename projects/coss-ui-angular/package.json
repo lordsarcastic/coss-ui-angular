@@ -1,0 +1,23 @@
+{
+  "name": "coss-ui-angular",
+  "version": "0.1.0",
+  "description": "Accessible Angular port of the COSS UI component catalogue.",
+  "keywords": [
+    "angular",
+    "ui",
+    "components",
+    "design-system",
+    "tailwind",
+    "coss"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
