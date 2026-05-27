@@ -1,6 +1,6 @@
 {
   "name": "@lordsarcastic/coss-ui-angular",
-  "version": "0.1.0",
+  "version": "0.1.0-beta",
   "description": "Accessible Angular port of the COSS UI component catalogue.",
   "keywords": [
     "angular",
@@ -8,9 +8,18 @@
     "components",
     "design-system",
     "tailwind",
-    "coss"
+    "coss",
+    "angular-coss-ui"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lordsarcastic/coss-ui-angular"
+  },
+  "bugs": {
+    "url": "https://github.com/lordsarcastic/coss-ui-angular/issues"
+  },
+  "homepage": "https://coss-ui.lordsarcastic.dev",
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0",
