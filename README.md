@@ -2,6 +2,8 @@
 
 Accessible Angular components inspired by the public COSS UI catalogue at `coss.com/ui/docs`.
 
+Hosted documentation: https://coss-ui.lordsarcastic.dev
+
 This repository contains:
 
 - `projects/coss-ui-angular`: publishable Angular library.
@@ -32,14 +34,14 @@ npm run ci
 Install the package after it is published:
 
 ```bash
-npm install coss-ui-angular
+npm install @lordsarcastic/coss-ui-angular
 ```
 
 Import individual standalone components or directives:
 
 ```ts
 import { Component } from '@angular/core';
-import { CossButtonDirective, CossInputDirective, CossFieldComponent } from 'coss-ui-angular';
+import { CossButtonDirective, CossInputDirective, CossFieldComponent } from '@lordsarcastic/coss-ui-angular';
 
 @Component({
   standalone: true,
@@ -59,7 +61,7 @@ export class ExampleComponent {}
 Or import the full collection:
 
 ```ts
-import { COSS_COMPONENTS } from 'coss-ui-angular';
+import { COSS_COMPONENTS } from '@lordsarcastic/coss-ui-angular';
 ```
 
 ## Tailwind Setup
@@ -68,7 +70,7 @@ The components are styled with Tailwind utility classes and CSS variables. Add t
 
 ```js
 export default {
-  content: ['./src/**/*.{html,ts}', './node_modules/coss-ui-angular/**/*.{mjs,js}'],
+  content: ['./src/**/*.{html,ts}', './node_modules/@lordsarcastic/coss-ui-angular/**/*.{mjs,js}'],
 };
 ```
 

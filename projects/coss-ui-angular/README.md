@@ -1,17 +1,19 @@
-# coss-ui-angular
+# @lordsarcastic/coss-ui-angular
 
 Standalone Angular components inspired by COSS UI and built for copyable, accessible product interfaces.
+
+Hosted documentation: https://coss-ui.lordsarcastic.dev
 
 ## Install
 
 ```bash
-npm install coss-ui-angular
+npm install @lordsarcastic/coss-ui-angular
 ```
 
 ## Import
 
 ```ts
-import { CossButtonDirective, CossCardComponent } from 'coss-ui-angular';
+import { CossButtonDirective, CossCardComponent } from '@lordsarcastic/coss-ui-angular';
 ```
 
 Every export is standalone. You can import one component at a time, or use `COSS_COMPONENTS` for the full collection.

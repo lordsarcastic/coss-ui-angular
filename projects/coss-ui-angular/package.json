@@ -1,5 +1,5 @@
 {
-  "name": "coss-ui-angular",
+  "name": "@lordsarcastic/coss-ui-angular",
   "version": "0.1.0",
   "description": "Accessible Angular port of the COSS UI component catalogue.",
   "keywords": [

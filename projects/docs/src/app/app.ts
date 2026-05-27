@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { COSS_COMPONENTS } from 'coss-ui-angular';
+import { COSS_COMPONENTS } from '@lordsarcastic/coss-ui-angular';
 
 type ComponentDoc = {
   name: string;
@@ -556,12 +556,12 @@ export class App {
     });
   });
 
-  readonly installSnippet = `npm install coss-ui-angular`;
+  readonly installSnippet = `npm install @lordsarcastic/coss-ui-angular`;
   readonly importSnippet =
-    `import { CossButtonDirective, CossCardComponent } from 'coss-ui-angular';`;
+    `import { CossButtonDirective, CossCardComponent } from '@lordsarcastic/coss-ui-angular';`;
   readonly themeSnippet = `content: [
   './src/**/*.{html,ts}',
-  './node_modules/coss-ui-angular/**/*.{mjs,js}',
+  './node_modules/@lordsarcastic/coss-ui-angular/**/*.{mjs,js}',
 ]`;
 
   readonly commandItems = [
