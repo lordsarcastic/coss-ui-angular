@@ -539,6 +539,10 @@ const docs: ComponentDoc[] = [
 export class App {
   readonly query = signal('');
   readonly category = signal('All');
+  readonly dialogOpen = signal(false);
+  readonly alertDialogOpen = signal(false);
+  readonly drawerOpen = signal(false);
+  readonly copiedUsage = signal('');
   readonly docs = docs;
   readonly categories = ['All', ...Array.from(new Set(docs.map((doc) => doc.category))).sort()];
   readonly filteredDocs = computed(() => {
@@ -569,6 +573,11 @@ export class App {
     { label: 'Draft', value: 'draft' },
     { label: 'Published', value: 'published' },
   ];
+  readonly autocompleteOptions = [
+    { label: 'Angular', value: 'angular' },
+    { label: 'Standalone', value: 'standalone' },
+    { label: 'Tailwind', value: 'tailwind' },
+  ];
   readonly radioOptions = [
     { label: 'Compact', value: 'compact' },
     { label: 'Comfortable', value: 'comfortable' },
@@ -578,4 +587,48 @@ export class App {
     { label: 'Code', value: 'code' },
     { label: 'A11y', value: 'a11y' },
   ];
+
+  formatUsage(usage: string): string {
+    const lines = usage
+      .replace(/></g, '>\n<')
+      .replace(/(<\/[^>]+>)([^<]+)(<\/[^>]+>)/g, '$1\n$2\n$3')
+      .split('\n');
+    let depth = 0;
+
+    return lines
+      .map((line) => {
+        const trimmed = line.trim();
+        const isOpening = /^<[^/!][^>]*>/.test(trimmed);
+        const isClosing = /^<\//.test(trimmed);
+        const isSelfClosing = /\/>$/.test(trimmed);
+        const opensAndCloses = /^<[^/!][^>]*>/.test(trimmed) && /<\/[^>]+>$/.test(trimmed);
+
+        if (isClosing) {
+          depth = Math.max(0, depth - 1);
+        }
+
+        const formatted = `${'  '.repeat(depth)}${trimmed}`;
+
+        if (isOpening && !isClosing && !isSelfClosing && !opensAndCloses) {
+          depth += 1;
+        }
+
+        return formatted;
+      })
+      .join('\n');
+  }
+
+  usageLines(usage: string): string[] {
+    return this.formatUsage(usage).split('\n');
+  }
+
+  async copyUsage(doc: ComponentDoc): Promise<void> {
+    await navigator.clipboard.writeText(this.formatUsage(doc.usage));
+    this.copiedUsage.set(doc.name);
+    window.setTimeout(() => {
+      if (this.copiedUsage() === doc.name) {
+        this.copiedUsage.set('');
+      }
+    }, 1500);
+  }
 }

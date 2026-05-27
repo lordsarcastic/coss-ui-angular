@@ -25,7 +25,15 @@
                 "input": "projects/docs/public"
               }
             ],
-            "styles": ["projects/docs/src/styles.css"]
+            "styles": ["projects/docs/src/styles.css"],
+            "server": "projects/docs/src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": ["localhost", "127.0.0.1"]
+            },
+            "ssr": {
+              "entry": "projects/docs/src/server.ts"
+            }
           },
           "configurations": {
             "production": {

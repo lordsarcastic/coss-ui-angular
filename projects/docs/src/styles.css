@@ -47,3 +47,21 @@ code,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
+
+coss-card,
+coss-card > section,
+coss-card-content,
+coss-card-content > div,
+coss-card-header,
+coss-card-header > header {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  coss-card-header header,
+  coss-card-content > div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

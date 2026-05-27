@@ -1,0 +1,90 @@
+name: Docs Frontend Image
+
+on:
+  pull_request:
+    paths:
+      - "projects/docs/package.json"
+      - "projects/docs/Dockerfile"
+      - ".github/workflows/docs-frontend-image.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "projects/docs/package.json"
+      - "projects/docs/Dockerfile"
+      - ".github/workflows/docs-frontend-image.yml"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/docs-frontend
+
+jobs:
+  detect-version-change:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.version.outputs.changed }}
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect docs version change
+        id: version
+        env:
+          DOCS_PACKAGE: projects/docs/package.json
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          set -euo pipefail
+
+          current_version="$(node -p "require('./${DOCS_PACKAGE}').version")"
+          changed="false"
+
+          if ! git cat-file -e "${BASE_SHA}:${DOCS_PACKAGE}" 2>/dev/null; then
+            changed="true"
+          else
+            previous_version="$(git show "${BASE_SHA}:${DOCS_PACKAGE}" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")"
+            if [ "${current_version}" != "${previous_version}" ]; then
+              changed="true"
+            fi
+          fi
+
+          echo "changed=${changed}" >> "${GITHUB_OUTPUT}"
+          echo "version=${current_version}" >> "${GITHUB_OUTPUT}"
+
+  build:
+    needs: detect-version-change
+    if: needs.detect-version-change.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build production docs frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: projects/docs/Dockerfile
+          push: ${{ github.event_name == 'push' }}
+          target: runtime
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.detect-version-change.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest

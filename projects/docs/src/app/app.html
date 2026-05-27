@@ -1,16 +1,18 @@
 <main class="min-h-screen">
   <section class="border-b border-border bg-background">
-    <div class="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
+    <div
+      class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.1fr_0.9fr] lg:py-20"
+    >
       <div class="flex flex-col justify-center">
         <div class="mb-5 flex flex-wrap items-center gap-2">
           <coss-badge>Angular 20</coss-badge>
           <coss-badge variant="outline">Standalone</coss-badge>
           <coss-badge variant="secondary">Tailwind</coss-badge>
         </div>
-        <h1 class="max-w-3xl text-4xl font-semibold tracking-normal text-foreground md:text-6xl">
+        <h1 class="max-w-3xl text-4xl font-semibold tracking-normal text-foreground sm:text-5xl md:text-6xl">
           COSS UI Angular
         </h1>
-        <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+        <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
           A copy-and-own Angular port of the COSS UI component catalogue. The package exports
           accessible standalone components and directives that are easy to import, style, test, and
           publish.
@@ -54,7 +56,7 @@
   </section>
 
   <section id="installation" class="border-b border-border">
-    <div class="mx-auto grid max-w-7xl gap-6 px-6 py-12 lg:grid-cols-3">
+    <div class="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-3">
       <coss-card>
         <coss-card-header>
           <coss-card-title>Install</coss-card-title>
@@ -88,7 +90,9 @@
   </section>
 
   <section class="border-b border-border">
-    <div class="mx-auto grid max-w-7xl gap-6 px-6 py-12 lg:grid-cols-[0.8fr_1.2fr]">
+    <div
+      class="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[0.8fr_1.2fr]"
+    >
       <div>
         <h2 class="text-2xl font-semibold">Working Examples</h2>
         <p class="mt-3 text-muted-foreground">
@@ -161,16 +165,16 @@
     </div>
   </section>
 
-  <section id="components" class="mx-auto max-w-7xl px-6 py-12">
+  <section id="components" class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
     <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <h2 class="text-3xl font-semibold">Component Reference</h2>
+        <h2 class="text-2xl font-semibold sm:text-3xl">Component Reference</h2>
         <p class="mt-3 max-w-2xl text-muted-foreground">
           Every exported component includes selector guidance, API notes, usage examples, and
           accessibility expectations.
         </p>
       </div>
-      <div class="grid gap-3 sm:grid-cols-2 lg:w-[34rem]">
+      <div class="grid w-full gap-3 sm:grid-cols-2 lg:w-[34rem]">
         <input
           cossInput
           type="search"
@@ -190,39 +194,412 @@
       @for (doc of filteredDocs(); track doc.name) {
         <coss-card>
           <coss-card-header>
-            <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-              <div>
+            <div class="flex min-w-0 flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div class="min-w-0">
                 <div class="mb-2 flex flex-wrap items-center gap-2">
                   <coss-badge variant="secondary">{{ doc.category }}</coss-badge>
-                  <code class="rounded bg-muted px-2 py-1 text-xs text-muted-foreground">
+                  <code class="max-w-full break-all rounded bg-muted px-2 py-1 text-xs text-muted-foreground">
                     {{ doc.selector }}
                   </code>
                 </div>
                 <coss-card-title>{{ doc.name }}</coss-card-title>
                 <coss-card-description>{{ doc.summary }}</coss-card-description>
               </div>
-              <a cossButton variant="ghost" size="sm" [href]="'#' + doc.name">Permalink</a>
+              <a cossButton variant="ghost" size="sm" class="self-start" [href]="'#' + doc.name">Permalink</a>
             </div>
           </coss-card-header>
           <coss-card-content>
-            <div class="grid gap-5 lg:grid-cols-[1fr_1fr]">
+            <div class="grid gap-5">
               <div>
-                <h3 class="mb-2 text-sm font-medium">Usage</h3>
-                <pre class="overflow-auto rounded-md bg-muted p-4 text-sm"><code>{{ doc.usage }}</code></pre>
-              </div>
-              <div class="grid gap-4">
-                <div>
-                  <h3 class="mb-2 text-sm font-medium">API</h3>
-                  <ul class="space-y-2 text-sm text-muted-foreground">
-                    @for (item of doc.api; track item) {
-                      <li class="flex gap-2">
-                        <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                        <span>{{ item }}</span>
-                      </li>
+                <h3 class="mb-2 text-sm font-medium">Preview</h3>
+                <div class="min-h-28 overflow-x-auto rounded-md border border-border bg-background p-4 sm:p-5">
+                  @switch (doc.name) {
+                    @case ('Accordion') {
+                      <coss-accordion>
+                        <coss-accordion-item>
+                          <span accordion-trigger>Shipping details</span>
+                          Ships in 3-5 business days.
+                        </coss-accordion-item>
+                      </coss-accordion>
                     }
-                  </ul>
+                    @case ('Alert') {
+                      <coss-alert variant="success">Documentation preview is available.</coss-alert>
+                    }
+                    @case ('Alert Dialog') {
+                      <button cossButton type="button" (click)="alertDialogOpen.set(true)">
+                        Open confirmation
+                      </button>
+                      <coss-alert-dialog
+                        [open]="alertDialogOpen()"
+                        label="Archive component"
+                        (openChange)="alertDialogOpen.set($event)"
+                      >
+                        <div class="grid gap-4">
+                          <h4 class="text-lg font-semibold">Archive component?</h4>
+                          <p class="text-sm text-muted-foreground">
+                            This demonstrates the modal confirmation surface.
+                          </p>
+                          <button cossButton type="button" (click)="alertDialogOpen.set(false)">
+                            Close
+                          </button>
+                        </div>
+                      </coss-alert-dialog>
+                    }
+                    @case ('Autocomplete') {
+                      <coss-autocomplete
+                        label="Framework"
+                        placeholder="Type a..."
+                        [options]="autocompleteOptions"
+                      />
+                    }
+                    @case ('Avatar') {
+                      <coss-avatar fallback="CL" alt="COSS Library" />
+                    }
+                    @case ('Badge') {
+                      <div class="flex flex-wrap gap-2">
+                        <coss-badge>Default</coss-badge>
+                        <coss-badge variant="success">Stable</coss-badge>
+                        <coss-badge variant="warning">Beta</coss-badge>
+                      </div>
+                    }
+                    @case ('Breadcrumb') {
+                      <coss-breadcrumb>
+                        <coss-breadcrumb-item><a href="#components">Docs</a></coss-breadcrumb-item>
+                        <coss-breadcrumb-item>Components</coss-breadcrumb-item>
+                      </coss-breadcrumb>
+                    }
+                    @case ('Button') {
+                      <div class="flex flex-wrap gap-3">
+                        <button cossButton type="button">Primary</button>
+                        <button cossButton variant="outline" type="button">Outline</button>
+                      </div>
+                    }
+                    @case ('Calendar') {
+                      <coss-calendar label="Release date" value="2026-05-27" />
+                    }
+                    @case ('Card') {
+                      <coss-card>
+                        <coss-card-header>
+                          <coss-card-title>Card title</coss-card-title>
+                          <coss-card-description>Short supporting copy.</coss-card-description>
+                        </coss-card-header>
+                        <coss-card-content>
+                          <p class="text-sm text-muted-foreground">Card body content.</p>
+                        </coss-card-content>
+                      </coss-card>
+                    }
+                    @case ('Checkbox') {
+                      <label class="flex items-center gap-3 text-sm">
+                        <coss-checkbox />
+                        Accept updates
+                      </label>
+                    }
+                    @case ('Collapsible') {
+                      <coss-collapsible>
+                        <span collapsible-trigger>Toggle details</span>
+                        <p class="text-sm text-muted-foreground">Hidden content rendered on demand.</p>
+                      </coss-collapsible>
+                    }
+                    @case ('Command') {
+                      <coss-command [items]="commandItems" placeholder="Search actions..." />
+                    }
+                    @case ('Date Picker') {
+                      <coss-date-picker label="Publish date" value="2026-05-27" />
+                    }
+                    @case ('Dialog') {
+                      <button cossButton type="button" (click)="dialogOpen.set(true)">Open dialog</button>
+                      <coss-dialog
+                        [open]="dialogOpen()"
+                        label="Example dialog"
+                        (openChange)="dialogOpen.set($event)"
+                      >
+                        <div class="grid gap-4">
+                          <h4 class="text-lg font-semibold">Example dialog</h4>
+                          <p class="text-sm text-muted-foreground">Dialog content rendered by COSS UI.</p>
+                          <button cossButton type="button" (click)="dialogOpen.set(false)">Close</button>
+                        </div>
+                      </coss-dialog>
+                    }
+                    @case ('Drawer / Sheet') {
+                      <button cossButton type="button" (click)="drawerOpen.set(true)">Open drawer</button>
+                      <coss-drawer
+                        [open]="drawerOpen()"
+                        label="Example drawer"
+                        (openChange)="drawerOpen.set($event)"
+                      >
+                        <div class="grid gap-4">
+                          <h4 class="text-lg font-semibold">Drawer content</h4>
+                          <p class="text-sm text-muted-foreground">A side panel for focused work.</p>
+                          <button cossButton type="button" (click)="drawerOpen.set(false)">Close</button>
+                        </div>
+                      </coss-drawer>
+                    }
+                    @case ('Empty') {
+                      <coss-empty>
+                        <h4 class="font-medium">No components selected</h4>
+                        <p class="text-sm text-muted-foreground">Adjust filters to show results.</p>
+                      </coss-empty>
+                    }
+                    @case ('Field') {
+                      <coss-field>
+                        <label cossLabel for="preview-field">Package name</label>
+                        <input cossInput id="preview-field" value="coss-ui-angular" />
+                        <coss-field-description>Use native inputs with COSS styling.</coss-field-description>
+                      </coss-field>
+                    }
+                    @case ('Fieldset') {
+                      <coss-fieldset>
+                        <coss-legend>Preferences</coss-legend>
+                        <label class="flex items-center gap-3 text-sm">
+                          <coss-checkbox />
+                          Email updates
+                        </label>
+                      </coss-fieldset>
+                    }
+                    @case ('Form') {
+                      <coss-form>
+                        <coss-field>
+                          <label cossLabel for="preview-form-email">Email</label>
+                          <input cossInput id="preview-form-email" placeholder="you@example.com" />
+                        </coss-field>
+                        <button cossButton type="button">Submit</button>
+                      </coss-form>
+                    }
+                    @case ('Frame') {
+                      <coss-frame>
+                        <p class="text-sm text-muted-foreground">Framed content with a subtle border.</p>
+                      </coss-frame>
+                    }
+                    @case ('Group') {
+                      <coss-group>
+                        <button cossButton variant="outline" type="button">Day</button>
+                        <button cossButton variant="outline" type="button">Week</button>
+                        <button cossButton variant="outline" type="button">Month</button>
+                      </coss-group>
+                    }
+                    @case ('Input') {
+                      <input cossInput placeholder="Component name" value="Button" />
+                    }
+                    @case ('Input Group') {
+                      <coss-input-group>
+                        <coss-input-addon>https://</coss-input-addon>
+                        <input cossInput unstyled value="coss.dev" />
+                      </coss-input-group>
+                    }
+                    @case ('Keyboard Key') {
+                      <coss-kbd-group>
+                        <coss-kbd>⌘</coss-kbd>
+                        <coss-kbd>K</coss-kbd>
+                      </coss-kbd-group>
+                    }
+                    @case ('Label') {
+                      <label cossLabel for="preview-label">Label text</label>
+                    }
+                    @case ('Menu') {
+                      <coss-menu>
+                        <span menu-trigger>Open menu</span>
+                        <coss-menu-item>Copy</coss-menu-item>
+                        <coss-menu-item>Rename</coss-menu-item>
+                      </coss-menu>
+                    }
+                    @case ('Meter') {
+                      <coss-meter [value]="64">Storage usage: 64%</coss-meter>
+                    }
+                    @case ('Number Field') {
+                      <coss-number-field label="Quantity" [value]="3" [min]="0" [max]="10" />
+                    }
+                    @case ('OTP Field') {
+                      <coss-otp-field [length]="4" />
+                    }
+                    @case ('Pagination') {
+                      <coss-pagination [page]="2" [total]="4" />
+                    }
+                    @case ('Popover') {
+                      <coss-popover>
+                        <span popover-trigger>Open popover</span>
+                        <p class="text-sm">Popover content appears next to the trigger.</p>
+                      </coss-popover>
+                    }
+                    @case ('Preview Card') {
+                      <coss-preview-card>
+                        <button cossButton variant="outline" preview-trigger type="button">Hover preview</button>
+                        <p>Preview cards reveal supporting information.</p>
+                      </coss-preview-card>
+                    }
+                    @case ('Progress') {
+                      <coss-progress [value]="72" />
+                    }
+                    @case ('Radio Group') {
+                      <coss-radio-group [options]="radioOptions" value="compact" />
+                    }
+                    @case ('Scroll Area') {
+                      <coss-scroll-area maxHeight="7rem">
+                        <div class="grid gap-2 p-3 text-sm">
+                          <p>Accordion</p>
+                          <p>Alert</p>
+                          <p>Button</p>
+                          <p>Card</p>
+                          <p>Dialog</p>
+                        </div>
+                      </coss-scroll-area>
+                    }
+                    @case ('Select') {
+                      <coss-select label="Status" [options]="selectOptions" value="draft" />
+                    }
+                    @case ('Separator') {
+                      <div class="grid gap-4">
+                        <p class="text-sm">Above separator</p>
+                        <coss-separator />
+                        <p class="text-sm text-muted-foreground">Below separator</p>
+                      </div>
+                    }
+                    @case ('Skeleton') {
+                      <div class="grid gap-3">
+                        <coss-skeleton className="h-4 w-48" />
+                        <coss-skeleton className="h-4 w-32" />
+                      </div>
+                    }
+                    @case ('Slider') {
+                      <coss-slider label="Density" [value]="45" />
+                    }
+                    @case ('Spinner') {
+                      <div class="flex items-center gap-3">
+                        <coss-spinner />
+                        <span class="text-sm text-muted-foreground">Loading preview</span>
+                      </div>
+                    }
+                    @case ('Switch') {
+                      <label class="flex items-center gap-3 text-sm">
+                        <coss-switch />
+                        Enable notifications
+                      </label>
+                    }
+                    @case ('Table') {
+                      <coss-table>
+                        <thead>
+                          <tr class="border-b border-border">
+                            <th class="p-2 text-left">Component</th>
+                            <th class="p-2 text-left">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="border-b border-border">
+                            <td class="p-2">Button</td>
+                            <td class="p-2">Ready</td>
+                          </tr>
+                          <tr>
+                            <td class="p-2">Dialog</td>
+                            <td class="p-2">Ready</td>
+                          </tr>
+                        </tbody>
+                      </coss-table>
+                    }
+                    @case ('Tabs') {
+                      <coss-tabs [tabs]="tabItems" value="preview">
+                        <p class="text-sm text-muted-foreground">Preview tab content.</p>
+                      </coss-tabs>
+                    }
+                    @case ('Textarea') {
+                      <textarea cossTextarea>Multi-line component notes.</textarea>
+                    }
+                    @case ('Toast') {
+                      <coss-toast>Saved documentation changes.</coss-toast>
+                    }
+                    @case ('Toggle') {
+                      <coss-toggle-group>
+                        <coss-toggle variant="outline">Bold</coss-toggle>
+                        <coss-toggle variant="outline">Italic</coss-toggle>
+                      </coss-toggle-group>
+                    }
+                    @case ('Toolbar') {
+                      <coss-toolbar>
+                        <button cossButton size="icon-sm" variant="ghost" type="button">B</button>
+                        <button cossButton size="icon-sm" variant="ghost" type="button">I</button>
+                        <button cossButton size="icon-sm" variant="ghost" type="button">U</button>
+                      </coss-toolbar>
+                    }
+                    @case ('Tooltip') {
+                      <coss-tooltip text="Refresh">
+                        <button cossButton size="icon" variant="outline" type="button">↻</button>
+                      </coss-tooltip>
+                    }
+                  }
                 </div>
-                <coss-alert variant="info">{{ doc.accessibility }}</coss-alert>
+              </div>
+
+              <div class="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+                <div class="min-w-0">
+                  <div class="mb-2 flex items-center justify-between gap-3">
+                    <h3 class="text-sm font-medium">Usage</h3>
+                    <button
+                      cossButton
+                      variant="ghost"
+                      size="icon-sm"
+                      type="button"
+                      [attr.aria-label]="'Copy ' + doc.name + ' usage code'"
+                      [title]="copiedUsage() === doc.name ? 'Copied' : 'Copy code'"
+                      (click)="copyUsage(doc)"
+                    >
+                      @if (copiedUsage() === doc.name) {
+                        <svg
+                          aria-hidden="true"
+                          class="h-4 w-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      } @else {
+                        <svg
+                          aria-hidden="true"
+                          class="h-4 w-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect width="14" height="14" x="8" y="8" rx="2" />
+                          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                        </svg>
+                      }
+                    </button>
+                  </div>
+                  <div
+                    class="max-w-full overflow-auto rounded-md border border-border bg-muted py-3 font-mono text-xs leading-6 sm:text-sm"
+                  >
+                    <code class="block min-w-0">
+                      @for (line of usageLines(doc.usage); track $index) {
+                        <span class="grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] sm:grid-cols-[3rem_minmax(0,1fr)]">
+                          <span
+                            class="select-none border-r border-border px-2 text-right text-muted-foreground sm:px-3"
+                            >{{ $index + 1 }}</span
+                          >
+                          <span class="whitespace-pre-wrap break-words px-3 text-foreground sm:px-4">{{ line }}</span>
+                        </span>
+                      }
+                    </code>
+                  </div>
+                </div>
+                <div class="grid min-w-0 overflow-hidden gap-4">
+                  <div>
+                    <h3 class="mb-2 text-sm font-medium">API</h3>
+                    <ul class="space-y-2 text-sm text-muted-foreground">
+                      @for (item of doc.api; track item) {
+                        <li class="flex gap-2">
+                          <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                          <span>{{ item }}</span>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                  <coss-alert variant="info">{{ doc.accessibility }}</coss-alert>
+                </div>
               </div>
             </div>
           </coss-card-content>

@@ -1,0 +1,11 @@
+coss-card,
+coss-card-content,
+coss-card-header,
+coss-tabs,
+coss-command,
+coss-scroll-area,
+coss-table {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}

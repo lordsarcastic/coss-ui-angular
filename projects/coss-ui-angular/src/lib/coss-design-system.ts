@@ -1166,5 +1166,6 @@ export const COSS_COMPONENTS = [
   CossToastComponent,
   CossToggleComponent,
   CossToggleGroupComponent,
+  CossTooltipComponent,
   CossToolbarComponent,
 ] as const;
